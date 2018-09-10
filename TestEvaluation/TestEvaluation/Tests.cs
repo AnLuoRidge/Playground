@@ -7,6 +7,7 @@ namespace TestEvaluation
     public class Tests
     {
         private EquationSolver _equationSolver = new EquationSolver();
+        public QuadraticEquation _quadraticEquation = new QuadraticEquation();
 
         [Test]
         public void Test1()
