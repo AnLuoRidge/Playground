@@ -244,6 +244,12 @@ namespace TestEvaluation
             UnknownShouldBe(8, "X=2+4*3–6");
         }
         
+        [Test]
+        public void EndWithOperator()
+        {
+            UnknownShouldBe(14, "X=2+4*3–");
+        }
+        
         private static void UnknownShouldBe(float? expected, string expression)
         {
             Assert.AreEqual(expected, EquationSolver.Main(expression));

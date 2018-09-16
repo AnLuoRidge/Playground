@@ -83,7 +83,7 @@ namespace TestEvaluation
             return parsedExpression;
         }
 
-        public static void CheckIntegrity(List<Element> exp)
+        public static List<Element> CheckIntegrity(List<Element> exp)
         {
             var hasUnknown = false;
             var hasEquals = false;
@@ -118,6 +118,19 @@ namespace TestEvaluation
             {
                 throw (new NumbersNotFoundException("Numbers not found!"));
             }
+
+            // remove unused end operator
+            var expression = exp;
+            var lastType = expression.Last().Type;
+            if (lastType == ElementType.Division ||
+                lastType == ElementType.Multiple ||
+                lastType == ElementType.Plus ||
+                lastType == ElementType.Minus)
+            {
+                expression.RemoveAt(expression.Count - 1);
+            }
+
+            return expression;
         }
 
         // deal with a*X, such as 2X 
