@@ -101,11 +101,25 @@ namespace TestEvaluation
         }
 
         [Test]
-        public void A9()
+        public void RedundantTripleMinus()
         {
             UnknownShouldBe(2, "X = 14 - - - 8X + 4");
         }
-
+        [Test]
+        public void RedundantTriplePlus()
+        {
+            UnknownShouldBe(-2, "-X = 14 + + + 8X + 4");
+        }
+        [Test]
+        public void RedundantTripleDivision()
+        {
+            UnknownShouldBe(1, "3X = 14 / / / 2 - 8X + 4");
+        }
+        [Test]
+        public void RedundantTripleMultiplication()
+        {
+            UnknownShouldBe(4, "X = 14 * * * 2 - 5X - 4");
+        }
         [Test]
         public void A10()
         {
@@ -187,22 +201,22 @@ namespace TestEvaluation
         [Test]
         public void DivideByZero()
         {
-            UnknownShouldBe(null, "X + 2 = 3 / 0");
+            Assert.Throws<DivideByZeroException>(() => EquationSolver.Calc("X + 2 = 3 / 0"));
         }
         
         [Test]
-        public void DivideByZeroAfterBrackets()
+        public void DivideByZeroOutsideBrackets()
         {
-            UnknownShouldBe(null, "X + 2 = ( 3 + 2 ) / 0");
+            Assert.Throws<DivideByZeroException>(() => EquationSolver.Calc("X + 2 = ( 3 + 2 ) / 0"));
         }
         
         [Test]
         public void LargeNumber()
         {
-            UnknownShouldBe(null, "X + 222222222222222222222222 = ( 3 + 2 ) / 9999999999999999999999999999");
+            Assert.Throws<OverflowException>(() => EquationSolver.Calc("X + 66666666666666666666666666 = ( 3 + 2 ) / 5"));
         }
         
-        private void UnknownShouldBe(float? expected, string expression)
+        private static void UnknownShouldBe(float? expected, string expression)
         {
             Assert.AreEqual(expected, EquationSolver.Calc(expression));
         }

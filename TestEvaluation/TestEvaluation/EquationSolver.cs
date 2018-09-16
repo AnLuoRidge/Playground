@@ -43,8 +43,7 @@ public class EquationSolver // Refactor | Move
         var expression = args.Replace(" ", ""); // remove space(s)
         var parsedExpression = ParseCharacters(expression);
         parsedExpression = CombineDigits(parsedExpression);
-
-
+        parsedExpression = RemoveRedundantOperators(parsedExpression);
 //        ArrayList HandleExceptedOperators(ArrayList exp)
 //        {
 //            

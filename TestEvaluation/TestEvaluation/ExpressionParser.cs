@@ -143,6 +143,27 @@ num = int.Parse(combinedDigits);
 
             return combinedExp;
         }
+        
+        // if the same operator appear more than twice
+        public static List<Element> RemoveRedundantOperators(List<Element> expression)
+        {
+            var exp = expression;
+            for (var i = exp.Count - 1; i >= 0; i--)
+            {
+                var type = exp[i].Type;
+                if (i > 0)
+                {
+                    var lastType = exp[i - 1].Type;
+                    if (type == lastType)
+                    {
+                        exp.RemoveAt(i);
+                    }
+                }
+
+            }
+
+            return exp;
+        }
 
         public static List<Element> RevertMinus(List<Element> exp)
         {
@@ -179,6 +200,23 @@ num = int.Parse(combinedDigits);
             }
 
             return parsedExpression;
+        }
+
+        private static float SafeDivide(float a, float b)
+        {
+            float result;
+            try
+            {
+                result = (int) a / (int) b;
+                result = a / b;
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return result;
         }
 
         public static List<Element> RemoveBrackets(List<Element> exp)
@@ -272,8 +310,10 @@ num = int.Parse(combinedDigits);
                         // update by divided by the coefficient
                         for (var j = leftBracketIndex + 1; j < rightBracketIndex; j = j + 2)
                         {
-                            var updatedValue = 1 / coefficentAfterBracket.Value * parsedExpression[j].Value;
 
+                            var preciproal = SafeDivide(1, coefficentAfterBracket.Value);
+                            var updatedValue = preciproal * parsedExpression[j].Value;
+                            
                             // TODO: DELETE - update printValue
                             string updatedPrintValue;
                             if (parsedExpression[j].Type == ElementType.Num)
@@ -331,28 +371,18 @@ num = int.Parse(combinedDigits);
                 if (element.Type == ElementType.Division && i < parsedExpression.Count - 1)
                 {
                     var nextElement = parsedExpression[i + 1];
-                    // TODO: enum byte
                     if (nextElement.Type == ElementType.Num ||
                         nextElement.Type == ElementType.Unknown)
                     {
-                        float? updatedValue;
-                        try
-                        {
-                            updatedValue = 1 / (int) nextElement.Value;
-                        }
-                        catch (DivideByZeroException e)
-                        {
-                            Console.WriteLine(e);
-                            throw;
-                        }
+                        var updatedValue = SafeDivide(1, nextElement.Value.Value);
                         if (nextElement.Type == ElementType.Unknown)
                         {
-                            parsedExpression[i + 1] = new Element(ElementType.ReciprocalUnknown, 1 / nextElement.Value,
+                            parsedExpression[i + 1] = new Element(ElementType.ReciprocalUnknown, updatedValue,
                                 "1/" + nextElement.Print);
                         }
                         else
                         {
-                            parsedExpression[i + 1] = new Element(nextElement.Type, 1 / nextElement.Value,
+                            parsedExpression[i + 1] = new Element(nextElement.Type, updatedValue,
                                 "1/" + nextElement.Print);
                         }
 
@@ -404,12 +434,6 @@ num = int.Parse(combinedDigits);
             }
 
             return parsedExpression;
-        }
-
-        public static List<Element> RemoveRedundantOperators(List<Element> exp)
-        {
-            // if the same operator appear more than twice
-            return exp;
         }
 
         public static void PrintExpressionWhen(string leading, List<Element> exp)
