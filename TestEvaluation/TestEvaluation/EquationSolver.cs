@@ -25,13 +25,13 @@ public struct Element
     public readonly ElementType Type;
     public readonly float? Value;
     public readonly string Print;
-    
-        public Element(ElementType type, float? value, string print)
-        {
-            Type = type;
-            Value = value;
-            Print = print;
-        }
+
+    public Element(ElementType type, float? value, string print)
+    {
+        Type = type;
+        Value = value;
+        Print = print;
+    }
 }
 
 public class EquationSolver // Refactor | Move
@@ -49,16 +49,16 @@ public class EquationSolver // Refactor | Move
 //        {
 //            
 //        }
-        
+
         // -(
         // - 2
         // - X
         // - =???, -)
         // 预处理
         // 3X
-        
+
         // TODO: multipleOperator
-        
+
         // Handle minus -> -value，去括号前做一遍，去完再做一遍
         parsedExpression = RevertMinus(parsedExpression);
         parsedExpression = CombineCoefficientToUnknown(parsedExpression);
@@ -66,7 +66,7 @@ public class EquationSolver // Refactor | Move
 //        Console.WriteLine(string.Join("\n", parsedExpression));
 
         PrintExpressionWhen("Parsed: ", parsedExpression);
-        
+
         parsedExpression = RemoveBrackets(parsedExpression);
         PrintExpressionWhen("\nAll brackets removed:", parsedExpression);
 
@@ -104,13 +104,21 @@ public class EquationSolver // Refactor | Move
         {
             var b = coefficientX.Sum();
             var c = coefficient.Sum();
-            var solution = - (c / b);
-            return solution;
+            
+            try
+            {
+                var solution = -(c / b);
+                return solution;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         else
         {
             return null;
         }
- 
     }
 }

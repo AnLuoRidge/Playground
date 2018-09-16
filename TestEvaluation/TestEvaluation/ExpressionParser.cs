@@ -19,42 +19,49 @@ namespace TestEvaluation
                 {
                     parsedExpression.Add(new Element(ElementType.Num, num, ch.ToString()));
                 }
-           
+
                 // Unown
                 if (char.IsLetter(ch))
                 {
                     parsedExpression.Add(new Element(ElementType.Unknown, 1, ch.ToString()));
                 }
+
                 // =
                 if (ch == '=')
                 {
                     parsedExpression.Add(new Element(ElementType.Equals, null, ch.ToString()));
                 }
+
                 // +
                 if (ch == '+')
                 {
                     parsedExpression.Add(new Element(ElementType.Plus, null, ch.ToString()));
                 }
+
                 // -
                 if (ch == '-' || ch == '–')
                 {
                     parsedExpression.Add(new Element(ElementType.Minus, null, ch.ToString()));
                 }
+
                 // *
                 if (ch == '*')
                 {
                     parsedExpression.Add(new Element(ElementType.Multiple, null, ch.ToString()));
                 }
+
                 // /
                 if (ch == '/')
                 {
                     parsedExpression.Add(new Element(ElementType.Division, null, ch.ToString()));
                 }
+
                 // (
                 if (ch == '(')
                 {
                     parsedExpression.Add(new Element(ElementType.LeftBracket, null, ch.ToString()));
                 }
+
                 // )
                 if (ch == ')')
                 {
@@ -77,7 +84,8 @@ namespace TestEvaluation
                     var lastElement = parsedExpression[i - 1];
                     if (lastElement.Type == ElementType.Num)
                     {
-                        parsedExpression[i] = new Element(element.Type, lastElement.Value, lastElement.Print + element.Print);
+                        parsedExpression[i] = new Element(element.Type, lastElement.Value,
+                            lastElement.Print + element.Print);
                         parsedExpression.RemoveAt(i - 1);
                     }
                 }
@@ -85,6 +93,7 @@ namespace TestEvaluation
 
             return parsedExpression;
         }
+
         public static List<Element> CombineDigits(List<Element> exp)
         {
             var combinedExp = new List<Element>();
@@ -97,19 +106,41 @@ namespace TestEvaluation
                     combinedDigits += exp[i].Print;
                     if (i == exp.Count - 1)
                     {
-                        combinedExp.Add(new Element(ElementType.Num, int.Parse(combinedDigits), combinedDigits));
+                        int num;
+                        try
+                        {
+num = int.Parse(combinedDigits);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+                        combinedExp.Add(new Element(ElementType.Num, num, combinedDigits));
                     }
                 }
                 else
                 {
                     if (combinedDigits.Length > 0)
                     {
-                        combinedExp.Add(new Element(ElementType.Num, int.Parse(combinedDigits), combinedDigits));
+                        int num;
+                        try
+                        {
+                            num = int.Parse(combinedDigits);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
+                        combinedExp.Add(new Element(ElementType.Num, num, combinedDigits));
                     }
+
                     combinedExp.Add(exp[i]);
                     combinedDigits = "";
                 }
             }
+
             return combinedExp;
         }
 
@@ -117,7 +148,7 @@ namespace TestEvaluation
         {
             var parsedExpression = exp;
 
-            for (int i = parsedExpression.Count - 1; i >=0 ; i--)
+            for (int i = parsedExpression.Count - 1; i >= 0; i--)
             {
                 var element = parsedExpression[i];
                 if (element.Type == ElementType.Minus) //  exception: && i < parsedExpression.Count - 1
@@ -142,19 +173,18 @@ namespace TestEvaluation
                             {
                                 parsedExpression[i] = new Element(ElementType.Plus, null, "+");
                             }
-                            
                         }
-
                     }
                 }
             }
+
             return parsedExpression;
         }
 
         public static List<Element> RemoveBrackets(List<Element> exp)
         {
             var parsedExpression = exp;
-            
+
             // record index of brackets
             var bracketLocations = new List<int>();
             for (var i = 0; i < parsedExpression.Count; i++)
@@ -165,40 +195,42 @@ namespace TestEvaluation
                     bracketLocations.Add(i);
                 }
             }
-            
-        for (var i = bracketLocations.Count - 2; i >= 0; i = i - 2)
-        {
-            var leftBracketIndex = bracketLocations[i];
-            var rightBracketIndex = bracketLocations[i + 1];
 
-            // Handle 2(, but index 0 is not (
-            if (leftBracketIndex > 0)
+            for (var i = bracketLocations.Count - 2; i >= 0; i = i - 2)
             {
-                var coeffcientBeforeBracket = parsedExpression[leftBracketIndex - 1];
-                // if there is a coefficient before (
-                if (coeffcientBeforeBracket.Type == ElementType.Num)
+                var leftBracketIndex = bracketLocations[i];
+                var rightBracketIndex = bracketLocations[i + 1];
+
+                // Handle 2(, but index 0 is not (
+                if (leftBracketIndex > 0)
                 {
-                    // update the factors by multipled by the outside coefficient
-                    for (var j = leftBracketIndex + 1; j < rightBracketIndex; j=j+2)
+                    var coeffcientBeforeBracket = parsedExpression[leftBracketIndex - 1];
+                    // if there is a coefficient before (
+                    if (coeffcientBeforeBracket.Type == ElementType.Num)
                     {
-                        var updatedValue = coeffcientBeforeBracket.Value * parsedExpression[j].Value;
+                        // update the factors by multipled by the outside coefficient
+                        for (var j = leftBracketIndex + 1; j < rightBracketIndex; j = j + 2)
+                        {
+                            var updatedValue = coeffcientBeforeBracket.Value * parsedExpression[j].Value;
 
-                        // TODO: DELETE - update printValue
-                        string updatedPrintValue;
-                        if (parsedExpression[j].Type == ElementType.Num)
-                        {
-                            updatedPrintValue = updatedValue.ToString();
-                        } else if (parsedExpression[j].Type == ElementType.Unknown)
-                        {
-                            updatedPrintValue = updatedValue + "X";
-                        } else
-                        {
-                            updatedPrintValue = parsedExpression[j].Print;
-                        }
+                            // TODO: DELETE - update printValue
+                            string updatedPrintValue;
+                            if (parsedExpression[j].Type == ElementType.Num)
+                            {
+                                updatedPrintValue = updatedValue.ToString();
+                            }
+                            else if (parsedExpression[j].Type == ElementType.Unknown)
+                            {
+                                updatedPrintValue = updatedValue + "X";
+                            }
+                            else
+                            {
+                                updatedPrintValue = parsedExpression[j].Print;
+                            }
 
-                        // TODO: X (), ()/X
-                        ElementType updatedType = parsedExpression[j].Type;
-                         // if X (...) OR if 0 (...)
+                            // TODO: X (), ()/X
+                            ElementType updatedType = parsedExpression[j].Type;
+                            // if X (...) OR if 0 (...)
 //                        switch ((int) lastElement.Type * (int) parsedExpression[j].Type)
 //                        {
 //                            case 1:
@@ -212,52 +244,54 @@ namespace TestEvaluation
 //                                break;
 //                        }
 //                        
-                        parsedExpression[j] = new Element(updatedType, updatedValue, updatedPrintValue);
-                    }
-                    
-                    // if (...) / X OR X / X
+                            parsedExpression[j] = new Element(updatedType, updatedValue, updatedPrintValue);
+                        }
 
-                    // 不查后面还有没有括号，直接去括号。
+                        // if (...) / X OR X / X
+
+                        // 不查后面还有没有括号，直接去括号。
 //                    parsedExpression[leftBracketIndex] = new Element(ElementType.RightBracket, null, string.Empty);
 //                    parsedExpression[rightBracketIndex] = new Element(ElementType.LeftBracket, null, string.Empty);
-                    // TODO remove?
-                    parsedExpression.RemoveAt(rightBracketIndex);
-                    parsedExpression.RemoveAt(leftBracketIndex);
-                    
-                    // remove the coefficient before the bracket
-                        parsedExpression[leftBracketIndex-1] = new Element(ElementType.Num, 0, ""); // diff? string.empty
-//                        parsedExpression.RemoveAt(leftBracketIndex-1);
+                        // TODO remove?
+                        parsedExpression.RemoveAt(rightBracketIndex);
+                        parsedExpression.RemoveAt(leftBracketIndex);
+
+                        // remove the coefficient before the bracket
+//                        parsedExpression[leftBracketIndex - 1] =
+//                            new Element(ElementType.Num, 0, ""); // diff? string.empty
+                        parsedExpression.RemoveAt(leftBracketIndex-1);
+                    }
                 }
-
-                // )(
-            }
-
-            if (rightBracketIndex < parsedExpression.Count - 2)
-            {
-                if (exp[rightBracketIndex+1].Type == ElementType.Division)
+                
+                // (...) / ?
+                if (rightBracketIndex < parsedExpression.Count - 2)
                 {
-                    var coefficentAfterBracket = exp[rightBracketIndex + 2].Value;
-                    // update by divided by the coefficient
-                    for (var j = leftBracketIndex + 1; j < rightBracketIndex; j = j + 2)
+                    if (exp[rightBracketIndex + 1].Type == ElementType.Division)
                     {
-                        var updatedValue = 1 / coefficentAfterBracket.Value * parsedExpression[j].Value;
+                        var coefficentAfterBracket = exp[rightBracketIndex + 2].Value;
+                        // update by divided by the coefficient
+                        for (var j = leftBracketIndex + 1; j < rightBracketIndex; j = j + 2)
+                        {
+                            var updatedValue = 1 / coefficentAfterBracket.Value * parsedExpression[j].Value;
 
-                        // TODO: DELETE - update printValue
-                        string updatedPrintValue;
-                        if (parsedExpression[j].Type == ElementType.Num)
-                        {
-                            updatedPrintValue = updatedValue.ToString();
-                        } else if (parsedExpression[j].Type == ElementType.Unknown)
-                        {
-                            updatedPrintValue = updatedValue + "X";
-                        } else
-                        {
-                            updatedPrintValue = parsedExpression[j].Print;
-                        }
+                            // TODO: DELETE - update printValue
+                            string updatedPrintValue;
+                            if (parsedExpression[j].Type == ElementType.Num)
+                            {
+                                updatedPrintValue = updatedValue.ToString();
+                            }
+                            else if (parsedExpression[j].Type == ElementType.Unknown)
+                            {
+                                updatedPrintValue = updatedValue + "X";
+                            }
+                            else
+                            {
+                                updatedPrintValue = parsedExpression[j].Print;
+                            }
 
-                        // TODO: X (), ()/X
-                        ElementType updatedType = parsedExpression[j].Type;
-                        // if X (...) OR if 0 (...)
+                            // TODO: X (), ()/X
+                            ElementType updatedType = parsedExpression[j].Type;
+                            // if X (...) OR if 0 (...)
 //                        switch ((int) lastElement.Type * (int) parsedExpression[j].Type)
 //                        {
 //                            case 1:
@@ -271,22 +305,23 @@ namespace TestEvaluation
 //                                break;
 //                        }
 //                        
-                        parsedExpression[j] = new Element(updatedType, updatedValue, updatedPrintValue);
-                    }
-                                        
-                    // if (...) / X OR X / X
+                            parsedExpression[j] = new Element(updatedType, updatedValue, updatedPrintValue);
+                        }
 
-                    parsedExpression.RemoveAt(rightBracketIndex+2);
-                    parsedExpression.RemoveAt(rightBracketIndex+1);
-                    // TODO remove?
-                    parsedExpression.RemoveAt(rightBracketIndex);
-                    parsedExpression.RemoveAt(leftBracketIndex);
+                        // if (...) / X OR X / X
+
+                        parsedExpression.RemoveAt(rightBracketIndex + 2);
+                        parsedExpression.RemoveAt(rightBracketIndex + 1);
+                        // TODO remove?
+                        parsedExpression.RemoveAt(rightBracketIndex);
+                        parsedExpression.RemoveAt(leftBracketIndex);
+                    }
                 }
             }
-        }
 
             return parsedExpression;
         }
+
         public static List<Element> Divide(List<Element> exp)
         {
             var parsedExpression = exp;
@@ -300,15 +335,27 @@ namespace TestEvaluation
                     if (nextElement.Type == ElementType.Num ||
                         nextElement.Type == ElementType.Unknown)
                     {
-                        // TODO: update print
+                        float? updatedValue;
+                        try
+                        {
+                            updatedValue = 1 / (int) nextElement.Value;
+                        }
+                        catch (DivideByZeroException e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
                         if (nextElement.Type == ElementType.Unknown)
                         {
-                            parsedExpression[i + 1] = new Element(ElementType.ReciprocalUnknown, 1 / nextElement.Value, "1/" + nextElement.Print);
+                            parsedExpression[i + 1] = new Element(ElementType.ReciprocalUnknown, 1 / nextElement.Value,
+                                "1/" + nextElement.Print);
                         }
                         else
                         {
-                            parsedExpression[i + 1] = new Element(nextElement.Type, 1 / nextElement.Value, "1/" + nextElement.Print);
+                            parsedExpression[i + 1] = new Element(nextElement.Type, 1 / nextElement.Value,
+                                "1/" + nextElement.Print);
                         }
+
                         parsedExpression[i] = new Element(ElementType.Multiple, null, "*");
                     }
                 }
@@ -329,7 +376,7 @@ namespace TestEvaluation
                     var lastElement = parsedExpression[i - 1];
                     var product = lastElement.Value * nextElement.Value;
                     ElementType updatedType;
-                    
+
                     switch ((int) lastElement.Type * (int) nextElement.Type)
                     {
                         case 1:
@@ -339,17 +386,18 @@ namespace TestEvaluation
                             break;
                         case 2:
                             updatedType = ElementType.Unknown;
-                            parsedExpression[i - 1] = new Element(updatedType, product, product+"X");
+                            parsedExpression[i - 1] = new Element(updatedType, product, product + "X");
                             break;
                         case 3:
                             updatedType = ElementType.ReciprocalUnknown;
-                            parsedExpression[i - 1] = new Element(updatedType, product, product+"1/X");
+                            parsedExpression[i - 1] = new Element(updatedType, product, product + "1/X");
                             break;
                         default:
                             updatedType = nextElement.Type;
                             parsedExpression[i - 1] = new Element(updatedType, product, product.ToString());
                             break;
                     }
+
                     parsedExpression.RemoveAt(i + 1);
                     parsedExpression.RemoveAt(i);
                 }
@@ -357,7 +405,7 @@ namespace TestEvaluation
 
             return parsedExpression;
         }
-        
+
         public static List<Element> RemoveRedundantOperators(List<Element> exp)
         {
             // if the same operator appear more than twice
@@ -371,6 +419,7 @@ namespace TestEvaluation
             {
                 Console.Write(item.Print + " ");
             }
+            Console.WriteLine("");
         }
     }
 }
