@@ -232,6 +232,18 @@ namespace TestEvaluation
             UnknownShouldBe(1, "X/(X+12)=1/13");
         }
         
+        [Test]
+        public void A26()
+        {
+            UnknownShouldBe(1, "3X+5=8");
+        }
+        
+        [Test]
+        public void A25()
+        {
+            UnknownShouldBe(8, "X=2+4*3–6");
+        }
+        
         private static void UnknownShouldBe(float? expected, string expression)
         {
             Assert.AreEqual(expected, EquationSolver.Main(expression));

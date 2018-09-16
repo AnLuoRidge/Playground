@@ -221,7 +221,7 @@ namespace TestEvaluation
             for (var i = parsedExpression.Count - 1; i >= 0; i--)
             {
                 var element = parsedExpression[i];
-                var hasNext = i < parsedExpression.Count - 2;
+                var hasNext = i < parsedExpression.Count - 1;
                 if (element.Type == ElementType.Minus && hasNext)
                 {
                     var nextNum = parsedExpression[i + 1];
@@ -510,16 +510,16 @@ namespace TestEvaluation
             }
         }
 
-//        public static void PrintExpressionWhen(string leading, List<Element> exp)
-//        {
-//            Console.WriteLine("\n" + leading);
-//            foreach (var item in exp)
-//            {
-//                Console.Write(item.Print + " ");
-//            }
-//
-//            Console.WriteLine("");
-//        }
+        public static void PrintExpressionWhen(string leading, List<Element> exp)
+        {
+            Console.WriteLine("\n" + leading);
+            foreach (var item in exp)
+            {
+                Console.Write(item.Print + " ");
+            }
+
+            Console.WriteLine("");
+        }
     }
 }
 
