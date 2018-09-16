@@ -41,38 +41,19 @@ public class EquationSolver // Refactor | Move
         Console.WriteLine("Input: " + args);
 
         var expression = args.Replace(" ", ""); // remove space(s)
-        var parsedExpression = ParseCharacters(expression);
-        parsedExpression = CombineDigits(parsedExpression);
-        parsedExpression = RemoveRedundantOperators(parsedExpression);
-//        ArrayList HandleExceptedOperators(ArrayList exp)
-//        {
-//            
-//        }
-
-        // -(
-        // - 2
-        // - X
-        // - =???, -)
-        // 预处理
-        // 3X
-
-        // TODO: multipleOperator
-
-        // Handle minus -> -value，去括号前做一遍，去完再做一遍
-        parsedExpression = RevertMinus(parsedExpression);
-        parsedExpression = CombineCoefficientToUnknown(parsedExpression);
-
-//        Console.WriteLine(string.Join("\n", parsedExpression));
-
-        PrintExpressionWhen("Parsed: ", parsedExpression);
-
-        parsedExpression = RemoveBrackets(parsedExpression);
-        PrintExpressionWhen("\nAll brackets removed:", parsedExpression);
-
-        parsedExpression = Divide(parsedExpression);
-        PrintExpressionWhen("\nAfter division:", parsedExpression);
-        parsedExpression = Multiple(parsedExpression);
-        PrintExpressionWhen("\nAfter multiplication:", parsedExpression);
+        var exp = ParseCharacters(expression);
+        exp = CombineDigits(exp);
+        exp = RemoveRedundantOperators(exp);
+        exp = RevertMinus(exp);
+        exp = CombineCoefficientToUnknown(exp);
+        CheckIntegrity(exp);
+        PrintExpressionWhen("Parsed: ", exp);
+        exp = RemoveBrackets(exp);
+        PrintExpressionWhen("All brackets removed:", exp);
+        exp = Divide(exp);
+        PrintExpressionWhen("After division:", exp);
+        exp = Multiple(exp);
+        PrintExpressionWhen("After multiplication:", exp);
 
 // Solve the equation
         var coefficientX = new List<float>();
@@ -80,7 +61,7 @@ public class EquationSolver // Refactor | Move
 
         var toLeft = false;
 
-        foreach (var term in parsedExpression)
+        foreach (var term in exp)
         {
             if (term.Type == ElementType.Equals)
             {
@@ -104,7 +85,7 @@ public class EquationSolver // Refactor | Move
             var b = coefficientX.Sum();
             var c = coefficient.Sum();
 
-            var solution = SafeDivide(c, b);
+            var solution = -SafeDivide(c, b);
             return solution;
         }
         else

@@ -9,11 +9,6 @@ namespace TestEvaluation
     {
         public static List<Element> ParseCharacters(string exp)
         {
-            if (!exp.Contains("="))
-            {
-                throw (new EqualsNotFoundException("Equals not found"));
-            }
-            
             var parsedExpression = new List<Element>();
             // parse single char
             foreach (var ch in exp.ToCharArray())
@@ -74,12 +69,27 @@ namespace TestEvaluation
                 }
             }
 
+            return parsedExpression;
+        }
+
+        public static void CheckIntegrity(List<Element> exp)
+        {
             var hasUnknown = false;
-            foreach (var item in parsedExpression)
+            var hasEquals = false;
+            var hasNumbers = false;
+            foreach (var item in exp)
             {
-                if (item.Type == ElementType.Unknown)
+                switch (item.Type)
                 {
-                    hasUnknown = true;
+                    case ElementType.Unknown:
+                            hasUnknown = true;
+                            break;
+                    case ElementType.Equals:
+                        hasEquals = true;
+                        break;
+                    case ElementType.Num:
+                        hasNumbers = true;
+                        break;
                 }
             }
 
@@ -88,7 +98,14 @@ namespace TestEvaluation
                 throw (new UnknownNotFouldException("Unknown number not found!"));
             }
 
-            return parsedExpression;
+            if (!hasEquals)
+            {
+                throw (new EqualsNotFoundException("Equals not found!"));
+            }
+            if (!hasNumbers)
+            {
+                throw (new NumbersNotFoundException("Numbers not found!"));
+            }
         }
 
         // deal with a*X, such as 2X 
@@ -224,18 +241,14 @@ num = int.Parse(combinedDigits);
         public static float SafeDivide(float a, float b)
         {
             float result;
-            try
+            if (b == 0f)
             {
-                result = (int) a / (int) b;
-                result = a / b;
+                throw (new DivideByZeroException());
             }
-            catch (DivideByZeroException e)
+            else
             {
-                Console.WriteLine(e);
-                throw;
+                return a / b;
             }
-
-            return result;
         }
 
         public static List<Element> RemoveBrackets(List<Element> exp)
@@ -457,7 +470,7 @@ num = int.Parse(combinedDigits);
 
         public static void PrintExpressionWhen(string leading, List<Element> exp)
         {
-            Console.WriteLine(leading);
+            Console.WriteLine("\n" + leading);
             foreach (var item in exp)
             {
                 Console.Write(item.Print + " ");
@@ -474,5 +487,10 @@ public class UnknownNotFouldException: Exception {
 
 public class EqualsNotFoundException: Exception {
     public EqualsNotFoundException(string message): base(message) {
+    }
+}
+
+public class NumbersNotFoundException: Exception {
+    public NumbersNotFoundException(string message): base(message) {
     }
 }

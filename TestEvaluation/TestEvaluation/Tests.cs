@@ -216,6 +216,11 @@ namespace TestEvaluation
             Assert.Throws<UnknownNotFouldException>(() => EquationSolver.Calc("4 + 2 = ( 3 + 2 ) / 0"));
         }
         [Test]
+        public void NumbersNotFound()
+        {
+            Assert.Throws<NumbersNotFoundException>(() => EquationSolver.Calc("X = 2X"));
+        }
+        [Test]
         public void LargeNumber()
         {
             Assert.Throws<OverflowException>(() => EquationSolver.Calc("X + 66666666666666666666666666 = ( 3 + 2 ) / 5"));
