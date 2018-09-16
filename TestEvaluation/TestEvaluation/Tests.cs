@@ -201,34 +201,40 @@ namespace TestEvaluation
         [Test]
         public void DivideByZero()
         {
-            Assert.Throws<DivideByZeroException>(() => EquationSolver.Calc("X + 2 = 3 / 0"));
+            Assert.Throws<DivideByZeroException>(() => EquationSolver.Main("X + 2 = 3 / 0"));
         }
         
         [Test]
         public void EqualsNotFound()
         {
-            Assert.Throws<EqualsNotFoundException>(() => EquationSolver.Calc("X + 2 ( 3 + 2 ) / 0"));
+            Assert.Throws<EqualsNotFoundException>(() => EquationSolver.Main("X + 2 ( 3 + 2 ) / 0"));
         }
         
         [Test]
         public void UnknownNotFound()
         {
-            Assert.Throws<UnknownNotFouldException>(() => EquationSolver.Calc("4 + 2 = ( 3 + 2 ) / 0"));
+            Assert.Throws<UnknownNotFouldException>(() => EquationSolver.Main("4 + 2 = ( 3 + 2 ) / 0"));
         }
         [Test]
         public void NumbersNotFound()
         {
-            Assert.Throws<NumbersNotFoundException>(() => EquationSolver.Calc("X = 2X"));
+            Assert.Throws<NumbersNotFoundException>(() => EquationSolver.Main("X = 2X"));
         }
         [Test]
         public void LargeNumber()
         {
-            Assert.Throws<OverflowException>(() => EquationSolver.Calc("X + 66666666666666666666666666 = ( 3 + 2 ) / 5"));
+            Assert.Throws<OverflowException>(() => EquationSolver.Main("X + 66666666666666666666666666 = ( 3 + 2 ) / 5"));
+        }
+
+        [Test]
+        public void UnknownDividedByBlock()
+        {
+            UnknownShouldBe(1, "X/(X+12)=1/13");
         }
         
         private static void UnknownShouldBe(float? expected, string expression)
         {
-            Assert.AreEqual(expected, EquationSolver.Calc(expression));
+            Assert.AreEqual(expected, EquationSolver.Main(expression));
         }
     }
 }
