@@ -9,6 +9,11 @@ namespace TestEvaluation
     {
         public static List<Element> ParseCharacters(string exp)
         {
+            if (!exp.Contains("="))
+            {
+                throw (new EqualsNotFoundException("Equals not found"));
+            }
+            
             var parsedExpression = new List<Element>();
             // parse single char
             foreach (var ch in exp.ToCharArray())
@@ -67,6 +72,20 @@ namespace TestEvaluation
                 {
                     parsedExpression.Add(new Element(ElementType.RightBracket, null, ch.ToString()));
                 }
+            }
+
+            var hasUnknown = false;
+            foreach (var item in parsedExpression)
+            {
+                if (item.Type == ElementType.Unknown)
+                {
+                    hasUnknown = true;
+                }
+            }
+
+            if (!hasUnknown)
+            {
+                throw (new UnknownNotFouldException("Unknown number not found!"));
             }
 
             return parsedExpression;
@@ -202,7 +221,7 @@ num = int.Parse(combinedDigits);
             return parsedExpression;
         }
 
-        private static float SafeDivide(float a, float b)
+        public static float SafeDivide(float a, float b)
         {
             float result;
             try
@@ -445,5 +464,15 @@ num = int.Parse(combinedDigits);
             }
             Console.WriteLine("");
         }
+    }
+}
+
+public class UnknownNotFouldException: Exception {
+    public UnknownNotFouldException(string message): base(message) {
+    }
+}
+
+public class EqualsNotFoundException: Exception {
+    public EqualsNotFoundException(string message): base(message) {
     }
 }

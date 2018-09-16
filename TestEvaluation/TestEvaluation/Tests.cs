@@ -205,11 +205,16 @@ namespace TestEvaluation
         }
         
         [Test]
-        public void DivideByZeroOutsideBrackets()
+        public void EqualsNotFound()
         {
-            Assert.Throws<DivideByZeroException>(() => EquationSolver.Calc("X + 2 = ( 3 + 2 ) / 0"));
+            Assert.Throws<EqualsNotFoundException>(() => EquationSolver.Calc("X + 2 ( 3 + 2 ) / 0"));
         }
         
+        [Test]
+        public void UnknownNotFound()
+        {
+            Assert.Throws<UnknownNotFouldException>(() => EquationSolver.Calc("4 + 2 = ( 3 + 2 ) / 0"));
+        }
         [Test]
         public void LargeNumber()
         {

@@ -103,17 +103,9 @@ public class EquationSolver // Refactor | Move
         {
             var b = coefficientX.Sum();
             var c = coefficient.Sum();
-            
-            try
-            {
-                var solution = -(c / b);
-                return solution;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+
+            var solution = SafeDivide(c, b);
+            return solution;
         }
         else
         {
