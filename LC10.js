@@ -69,6 +69,7 @@ var isMatch = (s, p) => {
             return;
           }
           break;
+
         case 'zeroOrMoreChars':
           char = pattern['zeroOrMoreChars'];
           if (v === 1) { console.log(`Zero or more chars: ${char}`)};
@@ -82,6 +83,22 @@ var isMatch = (s, p) => {
               break;
             }
           }
+          break;
+
+        case 'any':
+          char = pattern['any'];
+          for (i = checkingPosition; i < s.length; i++) {
+              resultFlags[checkingPosition] = true;
+              if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
+              checkingPosition ++;
+          }
+          break;
+
+        case 'anyChar':
+          char = pattern['anyChar'];
+          resultFlags[checkingPosition] = true;
+          if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
+          checkingPosition ++;
           break;
       }
     });
@@ -203,7 +220,10 @@ const cases = {
   dot2: {s: 'aab', p: 'a.b', a: true},
   dot3: {s: 'aa', p: 'a.*', a: true},
   dot4: {s: 'aa', p: 'a.*c', a: false},
-};
+  mixed: {s: 'tolerate', p: 'tol.*', a: true},
+  mixed2: {s: 'tolerrrate', p: 'tol.r*ate', a: true},
+  mixed3: {s: 'toxxlllxxxx', p: 'to..l*.*', a: true}
+  };
 
 // run test
 fullTest(cases);
