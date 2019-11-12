@@ -20,18 +20,20 @@
     - DEBUG, RELEASE logs
 
 */
-   
+const v = 1; // verbose
+
 var isMatch = (s, p) => {
     // create a empty or with sth length-defined array
     // var foo = new Array(45); // create an empty array with length 45
     
-    // const v = 0; // verbose
+    
 
     var resultFlags = new Array(s.split('').length);
-    resultFlags.forEach(flag => {
-        flag = false;
-    })
-    
+    for (i = 0; i < resultFlags.length; i++)
+    // resultFlags.forEach((flag, index) => {
+    //     this[index] = false;
+    // }, resultFlags);
+    if (v === 1) { console.log('Initial result flags: ', resultFlags)};
     var checkingPosition = -1;
     
     // const ALPHABET = 0;
@@ -45,6 +47,7 @@ var isMatch = (s, p) => {
         case 'char':
           checkingPosition ++;
           resultFlags[checkingPosition] = pattern['char'] === s[checkingPosition];
+          if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${pattern['char']}\nResult: ${resultFlags[checkingPosition]}`)}
           break;
       }
     });
@@ -57,20 +60,40 @@ var isMatch = (s, p) => {
     // return check(mockResultFlags);
 };
 
-const parseWildCards = (p) => {
 
-    var parsePatterns = (p) => {
+const parseWildCards = (p) => {
         // ab.c*d.*
         // a.b*.*c
-        const parsers = p.split('');
-        var patternArray = [];
-        for(i=0; i<parsers.split; i++) {
-            if (parser[i] != '.' && parser[i] != '*') {
-                
+
+        const chars = p.split('');
+        var patterns = [];
+        for(i = 0; i < chars.length; i++) {
+          const hasNext = i+1 < chars.length;
+          const next = hasNext ? chars[i+1] : '';
+          // debug following
+          // String.prototype.isChar = (char) => {return char != '.' && char != '*'};
+          const isChar = (char) => {return char !== '.' && char !== '*'};
+          const isDot = (char) => { return char === '.'};
+          // add func to String
+          // Start with char
+            if (isChar(chars[i])) {
+                if (hasNext) {
+                  if (isChar(next) || isDot(next)) { // char + char || char.
+                    patterns.push({char: chars[i]});
+                    if (v === 1) { console.log(`Round ${i}: 'char + char || char. : ${chars[i]}`)};
+                  } else if (next === '*') { // char + *
+                    patterns.push({zeroOrMoreChars: chars[i]});
+                    if (v === 1) { console.log(`Round ${i}: 'char + *: ${chars[i]}`)};
+                    i++;
+                  }
+                } else { // char EOF
+                    patterns.push({char: chars[i]});
+                    if (v === 1) { console.log(`Round ${i}: 'char EOF: ${chars[i]}`)};
+                }
             }
         }
-        console.log('Parsed pattern array: ', patternArray);
-    }
+        console.log('Parsed pattern array: ', patterns);
+        return patterns;
 
   // const mockReturn = [
   //   {char: 'a'},
@@ -80,23 +103,28 @@ const parseWildCards = (p) => {
   //   {char: 'c'}
   // ]
 
-    const mockReturn = [
-    {char: 'a'},
-    {char: 'a'}
-  ]
-  return mockReturn;
+  //   const mockReturn = [
+  //   {char: 'a'},
+  //   {char: 'a'}
+  // ]
+  // return mockReturn;
 }
 
 const check = (resultFlags) => {
     var pass = true;
     resultFlags.forEach(flag => {
-      if (flag === false) {
+      if (flag !== true) {
         pass = false;
         return;
       }
     })
     return pass;
 }
+
+// const testCheckResultFlags = (resultFlagsArray) => {
+//   for 
+// }
+
 
 const fullTest = (cases) => {
   var passCount = 0;
@@ -118,10 +146,12 @@ const fullTest = (cases) => {
 }
 
 const cases = {
-  fullMatch: {s: 'aa', p: 'aa', a: true}, 
-  fullMatch2: {s: 'aa', p: 'ab', a: false},
-  // dot: {s: 'aa', p: 'a.', a: true},
-  // asterisk: {s: 'me', p: 'me*', a: true}
+  fullMatch: {s: 'ab', p: 'ab', a: true}, 
+  fullMatch2: {s: 'ab', p: 'ac', a: false},
+  fullMatch3: {s: 'radio', p: 'radio', a: true},
+  fullMatch4: {s: 'Radio', p: 'radio', a: false},
+  asterisk: {s: 'me', p: 'me*', a: true},
+    // dot: {s: 'aa', p: 'a.', a: true},
 };
 
 // run test
