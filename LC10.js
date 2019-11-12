@@ -103,6 +103,7 @@ const parseWildCards = (p) => {
         var patterns = [];
         for(i = 0; i < chars.length; i++) {
           const hasNext = i+1 < chars.length;
+          const current = chars[i];
           const next = hasNext ? chars[i+1] : '';
           // debug following
           // String.prototype.isChar = (char) => {return char != '.' && char != '*'};
@@ -110,7 +111,7 @@ const parseWildCards = (p) => {
           const isDot = (char) => { return char === '.'};
           // add func to String
           // Start with char
-            if (isChar(chars[i])) {
+            if (isChar(current)) {
                 if (hasNext) {
                   if (isChar(next) || isDot(next)) { // char + char || char.
                     patterns.push({char: chars[i]});
@@ -123,6 +124,16 @@ const parseWildCards = (p) => {
                 } else { // char EOF
                     patterns.push({char: chars[i]});
                     if (v === 1) { console.log(`Round ${i}: 'char EOF: ${chars[i]}`)};
+                }
+            } else if (isDot(current)) {
+              if (hasNext) {
+                if (next === '*') {
+                  patterns.push({any: '.*'});
+                } else {
+                  patterns.push({anyChar:'.'});
+                }
+              } else {
+                  patterns.push({anyChar:'.'});
                 }
             }
         }
@@ -167,11 +178,11 @@ const fullTest = (cases) => {
     console.log(`${testCase.s} | ${testCase.p}`);
     if (isMatch(testCase.s, testCase.p) === testCase.a) {
       console.log('[PASS]');
-      console.log('-----------------------------------------------------------')
+      console.log('----------------------------------------------------------------------');
       passCount ++;
     } else {
       console.log('[FAIL]');
-      console.log('--------------------------FAIL--------------------')
+      console.log('---------------------------------FAIL---------------------------------');
     }
   }
   const caseLength = Object.keys(cases).length;
@@ -188,10 +199,11 @@ const cases = {
   asterisk2: {s: 'mee', p: 'me*', a: true},
   asterisk3: {s: 'meek', p: 'me*k', a: true},
   asterisk4: {s: 'mee', p: 'me*4', a: false},
-    // dot: {s: 'aa', p: 'a.', a: true},
+  dot: {s: 'aa', p: 'a.', a: true},
+  dot2: {s: 'aab', p: 'a.b', a: true},
+  dot3: {s: 'aa', p: 'a.*', a: true},
+  dot4: {s: 'aa', p: 'a.*c', a: false},
 };
 
 // run test
 fullTest(cases);
-
-// console.log('string'[1])
