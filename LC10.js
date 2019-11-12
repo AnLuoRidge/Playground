@@ -4,7 +4,8 @@
  * @return {boolean}
  */
 
-    // split p to chars
+    // func parseWildCards
+      // split p to chars
     // create a resultFlags:array which length = s
     // split the pattern to ps: array
     // type: 1 step: a, ., multiple steps: .*, a*
@@ -31,10 +32,36 @@ var isMatch = (s, p) => {
         flag = false;
     })
     
-    var checkedPosition = -1;
+    var checkingPosition = -1;
     
+    // const ALPHABET = 0;
+    // const SINGLE = 1;
+    // const MULTIPLE = 2;
+    // Mock parsedPatterns
+    // const parsedPatterns = {'a*':}; 
+    
+    parseWildCards(p).forEach((pattern) => {
+      switch (Object.keys(pattern)[0]) {
+        case 'char':
+          checkingPosition ++;
+          resultFlags[checkingPosition] = pattern['char'] === s[checkingPosition];
+          break;
+      }
+    });
+    
+
+    console.log("Result flags: ", resultFlags);
+    return check(resultFlags);
+    // mockResultFlags = ['a', false];
+    // console.log("Result flags: ", mockResultFlags);
+    // return check(mockResultFlags);
+};
+
+const parseWildCards = (p) => {
+
     var parsePatterns = (p) => {
         // ab.c*d.*
+        // a.b*.*c
         const parsers = p.split('');
         var patternArray = [];
         for(i=0; i<parsers.split; i++) {
@@ -44,33 +71,34 @@ var isMatch = (s, p) => {
         }
         console.log('Parsed pattern array: ', patternArray);
     }
-    
-    // const ALPHABET = 0;
-    // const SINGLE = 1;
-    // const MULTIPLE = 2;
-    // Mock parsedPatterns
-    // const parsedPatterns = {'a*':}; 
-    
-    const pattern = 'ab.c*d.*';
-    const parsers = p.split('');
-    for(i=0; i<parsers.split; i++) {
-        if (parser[i] != '.' && parser[i] != '*') {
-            //
-        }
-    }
-    
-    
-    // resultFlags = [false];
-    console.log("Result flags: ", resultFlags);
-    resultFlags.forEach(flag => {
-        if (flag != true) {
-            return false;
-        }
-    })
-    return true;
-};
 
-const test = (cases) => {
+  // const mockReturn = [
+  //   {char: 'a'},
+  //   {anyChar: '.'},
+  //   {zeroOrMoreChars: 'b*'},
+  //   {any: '.*'},
+  //   {char: 'c'}
+  // ]
+
+    const mockReturn = [
+    {char: 'a'},
+    {char: 'a'}
+  ]
+  return mockReturn;
+}
+
+const check = (resultFlags) => {
+    var pass = true;
+    resultFlags.forEach(flag => {
+      if (flag === false) {
+        pass = false;
+        return;
+      }
+    })
+    return pass;
+}
+
+const fullTest = (cases) => {
   var passCount = 0;
   for (let key in cases) {
     const testCase = cases[key];
@@ -92,9 +120,11 @@ const test = (cases) => {
 const cases = {
   fullMatch: {s: 'aa', p: 'aa', a: true}, 
   fullMatch2: {s: 'aa', p: 'ab', a: false},
-  dot: {s: 'aa', p: 'a.', a: true},
-  asterisk: {s: 'me', p: 'me*', a: true}
+  // dot: {s: 'aa', p: 'a.', a: true},
+  // asterisk: {s: 'me', p: 'me*', a: true}
 };
 
 // run test
-test(cases);
+fullTest(cases);
+
+// console.log('string'[1])
