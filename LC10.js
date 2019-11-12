@@ -26,15 +26,15 @@ var isMatch = (s, p) => {
     // create a empty or with sth length-defined array
     // var foo = new Array(45); // create an empty array with length 45
     
-    
-
     var resultFlags = new Array(s.split('').length);
-    for (i = 0; i < resultFlags.length; i++)
+    for (i = 0; i < resultFlags.length; i++) {
+      resultFlags[i] = false;
+    }
     // resultFlags.forEach((flag, index) => {
     //     this[index] = false;
     // }, resultFlags);
     if (v === 1) { console.log('Initial result flags: ', resultFlags)};
-    var checkingPosition = -1;
+    var checkingPosition = 0;
     
     // const ALPHABET = 0;
     // const SINGLE = 1;
@@ -43,11 +43,45 @@ var isMatch = (s, p) => {
     // const parsedPatterns = {'a*':}; 
     
     parseWildCards(p).forEach((pattern) => {
+      const isAny = Object.keys(pattern)[0] === 'Any';
+      const isZeroOrMoreChars = Object.keys(pattern)[0] === 'zeroOrMoreChars';
+      // if pattern is longer than string
+      if (checkingPosition >= s.length) {
+        if (isAny || isZeroOrMoreChars) {
+          resultFlags.push(true);
+        } else {
+          resultFlags.push(false);
+          return;
+        }
+      }
+      var char = 'char test against';
       switch (Object.keys(pattern)[0]) {
         case 'char':
-          checkingPosition ++;
-          resultFlags[checkingPosition] = pattern['char'] === s[checkingPosition];
-          if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${pattern['char']}\nResult: ${resultFlags[checkingPosition]}`)}
+          char = pattern['char'];
+          // resultFlags[checkingPosition] = char === s[checkingPosition];
+          if (char === s[checkingPosition]) {
+            resultFlags[checkingPosition] = true;
+            if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
+            checkingPosition ++;
+          } else {
+            resultFlags[checkingPosition] = false;
+            if (v === 1) { console.log(`Failed to check position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
+            return;
+          }
+          break;
+        case 'zeroOrMoreChars':
+          char = pattern['zeroOrMoreChars'];
+          if (v === 1) { console.log(`Zero or more chars: ${char}`)};
+          for (i = checkingPosition; i < s.length; i++) {
+            if (char === s[checkingPosition]) {
+              resultFlags[checkingPosition] = true;
+              if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
+              checkingPosition ++;
+            } else {
+              if (v === 1) { console.log(`zeroOrMoreChars breaks at location ${checkingPosition}`)};
+              break;
+            }
+          }
           break;
       }
     });
@@ -80,7 +114,7 @@ const parseWildCards = (p) => {
                 if (hasNext) {
                   if (isChar(next) || isDot(next)) { // char + char || char.
                     patterns.push({char: chars[i]});
-                    if (v === 1) { console.log(`Round ${i}: 'char + char || char. : ${chars[i]}`)};
+                    if (v === 1) { console.log(`Location ${i}: 'char + char || char. : ${chars[i]}`)};
                   } else if (next === '*') { // char + *
                     patterns.push({zeroOrMoreChars: chars[i]});
                     if (v === 1) { console.log(`Round ${i}: 'char + *: ${chars[i]}`)};
@@ -133,11 +167,11 @@ const fullTest = (cases) => {
     console.log(`${testCase.s} | ${testCase.p}`);
     if (isMatch(testCase.s, testCase.p) === testCase.a) {
       console.log('[PASS]');
-      console.log('---------------------------------------------')
+      console.log('-----------------------------------------------------------')
       passCount ++;
     } else {
       console.log('[FAIL]');
-      console.log('---------------------')
+      console.log('--------------------------FAIL--------------------')
     }
   }
   const caseLength = Object.keys(cases).length;
@@ -151,6 +185,9 @@ const cases = {
   fullMatch3: {s: 'radio', p: 'radio', a: true},
   fullMatch4: {s: 'Radio', p: 'radio', a: false},
   asterisk: {s: 'me', p: 'me*', a: true},
+  asterisk2: {s: 'mee', p: 'me*', a: true},
+  asterisk3: {s: 'meek', p: 'me*k', a: true},
+  asterisk4: {s: 'mee', p: 'me*4', a: false},
     // dot: {s: 'aa', p: 'a.', a: true},
 };
 
