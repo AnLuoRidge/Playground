@@ -45,15 +45,36 @@ var isMatch = (s, p) => {
     parseWildCards(p).forEach((pattern) => {
       const isAny = Object.keys(pattern)[0] === 'Any';
       const isZeroOrMoreChars = Object.keys(pattern)[0] === 'zeroOrMoreChars';
+      var anyStartFlag = 0;
+      var checkingPosition2 = 0;
       // if pattern is longer than string
+      // should I reverse the matching process?
       if (checkingPosition >= s.length) {
-        if (isAny || isZeroOrMoreChars) {
-          resultFlags.push(true);
-        } else {
-          resultFlags.push(false);
-          return;
+        var char = 'char test against';
+        switch (Object.keys(pattern)[0]) {
+          case 'char':
+          char = pattern['char'];
+          resultFlags[s.length-1] = false;
+          for (checkingPosition2=anyStartFlag; checkingPosition2<s.length; checkingPosition2++) {
+            if (s[checkingPosition2] === char) {
+              resultFlags[checkingPosition2] = true;
+            }
+          }
         }
-      }
+
+
+        
+        // if (isAny || isZeroOrMoreChars) {
+        //   resultFlags.push(true);
+        // } else if (pattern['char'] === s[s.length-1]) {
+        //     resultFlags[s.length-1] = true;
+        //   } else {
+        //     resultFlags.push(false);
+        //     return;
+        //   }
+        }
+
+      // string >= pattern
       var char = 'char test against';
       switch (Object.keys(pattern)[0]) {
         case 'char':
@@ -63,16 +84,17 @@ var isMatch = (s, p) => {
             resultFlags[checkingPosition] = true;
             if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
             checkingPosition ++;
-          } else {
+          } else if (checkingPosition < s.length) {
             resultFlags[checkingPosition] = false;
             if (v === 1) { console.log(`Failed to check position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
             return;
           }
           break;
 
-        case 'zeroOrMoreChars':
+        case 'zeroOrMoreChars': // ?*
           char = pattern['zeroOrMoreChars'];
           if (v === 1) { console.log(`Zero or more chars: ${char}`)};
+          anyStartFlag = checkingPosition;
           for (i = checkingPosition; i < s.length; i++) {
             if (char === s[checkingPosition]) {
               resultFlags[checkingPosition] = true;
@@ -85,8 +107,9 @@ var isMatch = (s, p) => {
           }
           break;
 
-        case 'any':
+        case 'any': // .*
           char = pattern['any'];
+          anyStartFlag = checkingPosition;
           for (i = checkingPosition; i < s.length; i++) {
               resultFlags[checkingPosition] = true;
               if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
@@ -212,17 +235,20 @@ const cases = {
   fullMatch2: {s: 'ab', p: 'ac', a: false},
   fullMatch3: {s: 'radio', p: 'radio', a: true},
   fullMatch4: {s: 'Radio', p: 'radio', a: false},
+  fullMatch5: {s: 'aaa', p: 'aaaa', a: false},
   asterisk: {s: 'me', p: 'me*', a: true},
   asterisk2: {s: 'mee', p: 'me*', a: true},
   asterisk3: {s: 'meek', p: 'me*k', a: true},
   asterisk4: {s: 'mee', p: 'me*4', a: false},
+  asterisk5: {s: 'aaa', p: 'a*a', a: true},
   dot: {s: 'aa', p: 'a.', a: true},
   dot2: {s: 'aab', p: 'a.b', a: true},
   dot3: {s: 'aa', p: 'a.*', a: true},
   dot4: {s: 'aa', p: 'a.*c', a: false},
   mixed: {s: 'tolerate', p: 'tol.*', a: true},
   mixed2: {s: 'tolerrrate', p: 'tol.r*ate', a: true},
-  mixed3: {s: 'toxxlllxxxx', p: 'to..l*.*', a: true}
+  mixed3: {s: 'toxxlllxxxx', p: 'to..l*.*', a: true},
+  mixed4: {s: 'ab', p: '.*c', a: false},
   };
 
 // run test
