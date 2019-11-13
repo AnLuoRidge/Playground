@@ -18,7 +18,6 @@
     - reverse building: bottom to top
     - map, reduce, filter, foreach
     - DEBUG, RELEASE logs
-
 */
 const v = 1; // verbose
 
@@ -42,36 +41,20 @@ var isMatch = (s, p) => {
     // Mock parsedPatterns
     // const parsedPatterns = {'a*':}; 
     
-    parseWildCards(p).forEach((pattern) => {
+    const patterns = parseWildCards(p);
+
+
+
+    parseWildCards(p).forEach((pattern, index, patterns) => {
       const isAny = Object.keys(pattern)[0] === 'Any';
       const isZeroOrMoreChars = Object.keys(pattern)[0] === 'zeroOrMoreChars';
-      var anyStartFlag = 0;
-      var checkingPosition2 = 0;
+      const hasNext = index < patterns.length - 1;
+
       // if pattern is longer than string
       // should I reverse the matching process?
       if (checkingPosition >= s.length) {
-        var char = 'char test against';
-        switch (Object.keys(pattern)[0]) {
-          case 'char':
-          char = pattern['char'];
-          resultFlags[s.length-1] = false;
-          for (checkingPosition2=anyStartFlag; checkingPosition2<s.length; checkingPosition2++) {
-            if (s[checkingPosition2] === char) {
-              resultFlags[checkingPosition2] = true;
-            }
-          }
-        }
-
-
-        
-        // if (isAny || isZeroOrMoreChars) {
-        //   resultFlags.push(true);
-        // } else if (pattern['char'] === s[s.length-1]) {
-        //     resultFlags[s.length-1] = true;
-        //   } else {
-        //     resultFlags.push(false);
-        //     return;
-        //   }
+          resultFlags.push(false);
+          return;
         }
 
       // string >= pattern
@@ -94,7 +77,13 @@ var isMatch = (s, p) => {
         case 'zeroOrMoreChars': // ?*
           char = pattern['zeroOrMoreChars'];
           if (v === 1) { console.log(`Zero or more chars: ${char}`)};
-          anyStartFlag = checkingPosition;
+
+          if (hasNext) {
+            // .*, a* 
+            // a
+            // .
+          }
+
           for (i = checkingPosition; i < s.length; i++) {
             if (char === s[checkingPosition]) {
               resultFlags[checkingPosition] = true;
@@ -109,7 +98,7 @@ var isMatch = (s, p) => {
 
         case 'any': // .*
           char = pattern['any'];
-          anyStartFlag = checkingPosition;
+
           for (i = checkingPosition; i < s.length; i++) {
               resultFlags[checkingPosition] = true;
               if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
@@ -117,7 +106,7 @@ var isMatch = (s, p) => {
           }
           break;
 
-        case 'anyChar':
+        case 'anyChar': // .
           char = pattern['anyChar'];
           resultFlags[checkingPosition] = true;
           if (v === 1) { console.log(`Checking position[${checkingPosition}]: ${s[checkingPosition]} | ${char}\nResult: ${resultFlags[checkingPosition]}`)}
