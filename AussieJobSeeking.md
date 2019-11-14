@@ -11,6 +11,7 @@
 - Infinity （公众号：Infinity_Coaching）// 各个专业方向的求职辅导都有，有些年头了。
 - 澳洲求职 (公众号：AUCareer)
 - NextGenius // 不是狠熟。
+- 橘子找工MandarinCareer（公众号：gh_00e8f8bd808d）
 - ACS Professional Year Half-day Summit
 - Meetups
 - Networking
