@@ -22,8 +22,8 @@
 
 
 # Application Progress 投递进度
-- FUJITSU
-- 2hats
-- Westpac
+- FUJITSU - Blockchain, etc. 
+- Westpac - Front-end
 - Aglive
-- AFL
+- AFL - RN
+- OverIP - Front-end
