@@ -26,7 +26,7 @@
 - FUJITSU - Blockchain, etc. 
 - Westpac - Front-end
 - Aglive
-- AFL - RN
-- OverIP - Front-end
-- Bigtincan - React
-- Hawksworth Consulting - Cloud Engineer
+- 23/10 AFL - RN
+- 14/11 OverIP - Front-end
+- 21/11 Bigtincan - React
+- 24/11 Hawksworth Consulting - Cloud Engineer
