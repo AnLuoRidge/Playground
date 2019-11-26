@@ -21,6 +21,8 @@
 - Indeed
 - LinkedIn
 
+## Resume
+1 page may not enough. 2-3 pages has a better change, since more keywords being matched.
 
 # Application Progress 投递进度
 - FUJITSU - Blockchain, etc. 
