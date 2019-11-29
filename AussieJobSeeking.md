@@ -1,4 +1,4 @@
-澳洲求职过程的相关琐碎记录，会考虑后期整理分享。
+澳洲求职过程记录
 
 # Resource 求职资源
 ## Grads
@@ -21,11 +21,14 @@
 - Indeed
 - LinkedIn
 
+## Resume
+1 page may not enough. 2-3 pages has a better change, since more keywords being matched.
 
 # Application Progress 投递进度
 - FUJITSU - Blockchain, etc. 
 - Westpac - Front-end
 - Aglive
-- AFL - RN
-- OverIP - Front-end
-- Bigtincan - React
+- 23/10 AFL - RN
+- 14/11 OverIP - Front-end
+- 21/11 Bigtincan - React
+- 24/11 Hawksworth Consulting - Cloud Engineer
