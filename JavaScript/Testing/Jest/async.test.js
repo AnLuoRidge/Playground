@@ -26,3 +26,19 @@ const res = await timeout(() => {
 });
 expect(res).toEqual('1s passed');
 });
+
+// Failed to close the port after executing all the tests
+beforeAll((done) => {
+  server = app.listen(4000, (err) => {
+    if (err) return done(err);
+
+    agent = request.agent(server); // since the application is already listening, it should use the allocated port
+    done();
+  });
+});
+
+afterAll(async (done) => {
+  console.log('The server is closing');
+  await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+  return  server && server.close(done);
+});
