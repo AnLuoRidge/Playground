@@ -1,21 +1,22 @@
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
 /**
  * @param {number[]} nums
  * @return {number}
  */
 
- // 2nd try✅️ (64 ms, 36.7 MB): Comparing array[i-1] with array[i]
- // Removed extra console.log() to save time.
- const removeDuplicates = (input) => {
-    let uniqueCount = 1;
-    for (let i = 1; i < input.length; i++) {
-      if (input[i] !== input[i - 1]) {
-        input[uniqueCount] = input[i];
-        uniqueCount++;
-      }
+// 2nd try✅️ (64 ms, 36.7 MB): Comparing array[i-1] with array[i]
+// Removed extra console.log() to save time.
+const removeDuplicates = (duplicates: number[]) => {
+  let uniqueCount: number = 1;
+  for (let i = 1; i < duplicates.length; i++) {
+    if (duplicates[i] !== duplicates[i - 1]) {
+      duplicates[uniqueCount] = duplicates[i];
+      uniqueCount++;
     }
-    console.log(`${uniqueCount}: [${input}]`);
-    return uniqueCount;
   }
+  return uniqueCount;
+}
 
  // 1st try✅️ (404 ms, 42.9 MB): Using ES7 `Array.includes()`
  // Without the notice of SORTED array
