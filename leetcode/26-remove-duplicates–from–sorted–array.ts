@@ -5,6 +5,19 @@
  * @return {number}
  */
 
+
+// 3rd Try✅️ (72 ms): Reduce calculation by removing `duplicates[i - 1]`.
+const removeDuplicates = (duplicates: number[]) => {
+    if (duplicates.length <= 1) return duplicates.length;
+    let uniqueCount: number = 0;
+    for (let i = 1; i < duplicates.length; i++) {
+      if (duplicates[i] !== duplicates[uniqueCount]) {
+        uniqueCount++;
+        duplicates[uniqueCount] = duplicates[i];
+      }
+    }
+    return uniqueCount + 1;
+  }
 // 2nd try✅️ (64 ms, 36.7 MB): Comparing array[i-1] with array[i]
 // Removed extra console.log() to save time.
 const removeDuplicates = (duplicates: number[]) => {
