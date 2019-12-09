@@ -3,7 +3,7 @@
 # Resource 求职资源
 ## Grads
 - CareerHub
-- [Ribit](ribit.net) // a platform out of CSIRO's Data61.
+- [Ribit](ribit.net) // a platform from CSIRO Data 61.
 - [GradAustralia](gradaustralia.com.au)
 - [GradConecction](au.gradconnection.com)
 - 2hats
