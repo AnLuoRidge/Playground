@@ -17,7 +17,7 @@
 - Meetups
 - Networking
 - 今日澳洲 // 需谨慎。很多公司没注册，或者不给钱，或者是中介。
-- 不推荐 Ecare Careers，参见：[有没有人上过Ecare的课程，他们的实习机会怎么样？](https://www.zhihu.com/question/51819047)
+- 不推荐 Ecare Careers<sup>[1](https://www.zhihu.com/question/51819047)</sup><sup>[, 2](https://www.taschinese.com/thread-231460-1-1.html)</sup>
 
 ### General
 - Seek
@@ -32,6 +32,9 @@
 
 ## Resume
 1 page may not enough. 2-3 pages has a better change, since more keywords being matched.
+
+
+
 
 ## Application Progress 投递进度
 - 201910??-FUJITSU-Blockchain, etc. 
