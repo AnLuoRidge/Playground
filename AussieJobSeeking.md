@@ -24,6 +24,7 @@
 - Gumtree
 - DNC 澳洲求职（公众号：dncconsulting）
 - 微信内推群
+- 在任何IT相关的微信群中直接打听
 
 ## Resume
 1 page may not enough. 2-3 pages has a better change, since more keywords being matched.
