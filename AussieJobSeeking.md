@@ -1,7 +1,7 @@
-澳洲求职过程记录
+# 澳洲IT求职记录
 
-# Resource 求职资源
-## Grads
+## Resource 求职资源
+### Grads
 - CareerHub
 - [Ribit](ribit.net) // a platform from CSIRO Data 61.
 - [GradAustralia](gradaustralia.com.au)
@@ -16,10 +16,10 @@
 - ACS Professional Year Half-day Summit
 - Meetups
 - Networking
-- 今日澳洲
+- 今日澳洲 // 需谨慎。很多公司没注册，或者不给钱，或者是中介。
 - 不推荐 Ecare Careers，参见：[有没有人上过Ecare的课程，他们的实习机会怎么样？](https://www.zhihu.com/question/51819047)
 
-## General
+### General
 - Seek
 - Indeed
 - Jora
@@ -33,11 +33,28 @@
 ## Resume
 1 page may not enough. 2-3 pages has a better change, since more keywords being matched.
 
-# Application Progress 投递进度
-- FUJITSU - Blockchain, etc. 
-- Westpac - Front-end
-- Aglive
-- 23/10 AFL - RN
-- 14/11 OverIP - Front-end
-- 21/11 Bigtincan - React
-- 24/11 Hawksworth Consulting - Cloud Engineer
+## Application Progress 投递进度
+- 201910??-FUJITSU-Blockchain, etc. 
+- 20191023-AFL-RN
+- 20191114-OverIP-Front-end
+- 20191121-Bigtincan-React
+- 20191209-Savv-e-front-end-intern
+- 20191113-Aglive-Software Development Engineer
+- 20191113-Westpac-Junior-Developer-Ribit
+- 20191124-hawksworth-consulting-graduate-cloud-engineer
+- 20191125-edge-interpreter-enquire-letter
+- 20191127-cheq
+- 20191127-enosi-full-stack-dev
+- 20191127-open-sparkz-react-native
+- 20191127-simple-KYC-iOS-dev
+- 20191127-TIQK-full-stack
+- 20191129-metigy-junior-web-developer-intern
+- 20191201-cognian-junior-software-engineer
+- 20191210-fox-studio-martial-art
+- 20191210-sandstone-graduate-dev
+- 20191213-kogan-full-stack
+- 20191213-stockland-junior-web-dev
+- 20191216-next-genius-ios-react-intern
+- 20191216-unknown-wordpress
+- 20191216-unkown-app
+- 20191216-velocity-web-developer
