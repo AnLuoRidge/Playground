@@ -15,11 +15,13 @@
 - ACS Professional Year Half-day Summit
 - Meetups
 - Networking
+- 今日澳洲
 
 ## General
 - Seek
 - Indeed
 - LinkedIn
+- Gumtree
 - DNC 澳洲求职（公众号：dncconsulting）
 - 微信内推群
 
