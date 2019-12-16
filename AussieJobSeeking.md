@@ -21,8 +21,10 @@
 ## General
 - Seek
 - Indeed
+- Jora
 - LinkedIn
 - Gumtree
+- [I work for NSW](https://iworkfor.nsw.gov.au/)
 - DNC 澳洲求职（公众号：dncconsulting）
 - 微信内推群
 - 在任何IT相关的微信群中直接打听
