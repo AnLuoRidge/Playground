@@ -16,6 +16,7 @@
 - Meetups
 - Networking
 - 今日澳洲
+- 不推荐 Ecare Careers，参见：[有没有人上过Ecare的课程，他们的实习机会怎么样？](https://www.zhihu.com/question/51819047)
 
 ## General
 - Seek
