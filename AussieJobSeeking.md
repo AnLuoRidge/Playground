@@ -1,5 +1,5 @@
 # 澳洲IT求职记录
-（不知道会不会被哪位小伙伴搜到，如想留言发issue）
+（不知道会不会被哪位小伙伴搜到，如想留言请发issue）
 
 ## Resource 求职资源
 ### Grads
@@ -18,6 +18,7 @@
 - Meetups
 - Networking
 - 今日澳洲（需谨慎。很多公司没注册，或者不给钱，或者是中介。）
+- [滴答网](http://bbs.tigtag.com/list-520.html)
 - 不推荐 Ecare Careers<sup>[1](https://www.zhihu.com/question/51819047)</sup><sup>[, 2](https://www.taschinese.com/thread-231460-1-1.html)</sup>
 
 ### General
