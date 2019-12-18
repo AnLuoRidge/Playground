@@ -19,6 +19,7 @@
 - Networking
 - 今日澳洲（需谨慎。很多公司没注册，或者不给钱，或者是中介。）
 - [滴答网](http://bbs.tigtag.com/list-520.html)
+- [悉尼中文网（也可选其他城市）](http://sydneybbs.com/forum.php?mod=forumdisplay&fid=279)
 - 不推荐 Ecare Careers<sup>[1](https://www.zhihu.com/question/51819047)</sup><sup>[, 2](https://www.taschinese.com/thread-231460-1-1.html)</sup>
 
 ### General
