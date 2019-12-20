@@ -7,11 +7,11 @@
 这样的话，2613 还剩 10,000 ✖️️ 20% = **2000** 个空位。
 如果配额使用率参照 2018-19 财年：70%，那就只有 **1400** 个空位。
 
-\* 根据 [Occupation Ceilings 2019-20 Program Year](https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/occupation-ceilings), 2613 总共有 8748 个空位。简直是做梦。
+\* 根据 [Occupation Ceilings 2019-20 Program Year](https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/occupation-ceilings)，2613 总共有 8748 个空位。简直是做梦。
 
 ## 2613高分候选人
 
-11月18日 EOI 池子里 90+ 的2613候选人大约有 410 个（按照新政加分后）。12月11日获邀了 22 人左右，假设一个月新增22个高分候选人，那么 410 - 22 + 22 ，还是 410 个候选人。到财年末，估计一个有500人吧。
+11月18日 EOI 池子里 90+ 的2613候选人大约有 410 个（按照新政加分后）。12月11日获邀了 22 人左右，假设一个月新增22个高分候选人，那么 410 - 22 + 22 ，还是 410 个候选人。到财年末，估计一共有500人。
 
 
 ## 结论
