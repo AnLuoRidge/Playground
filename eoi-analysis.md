@@ -18,7 +18,7 @@ By Ridge
 END OF 2019
 
 
-## TODO:
+### TODO
 - Visualisation
 - More data for prediction
 - More math tool/model
