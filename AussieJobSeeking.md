@@ -1,4 +1,4 @@
-# 澳洲IT求职记录
+# 澳洲IT求职
 （不知道会不会被哪位小伙伴搜到，如想留言请发issue）
 
 ## Resource 求职资源
@@ -14,6 +14,7 @@
 - 澳洲求职 (公众号：AUCareer)
 - NextGenius（一个孵化器，偶尔会有岗位。它的微信群也有不少大佬。）
 - 橘子找工MandarinCareer（公众号：gh_00e8f8bd808d）
+- DBC澳洲求职
 - ACS Professional Year Half-day Summit
 - Meetups
 - Networking
