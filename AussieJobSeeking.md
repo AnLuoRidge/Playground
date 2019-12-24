@@ -14,7 +14,8 @@
 - 澳洲求职 (公众号：AUCareer)
 - NextGenius（一个孵化器，偶尔会有岗位。它的微信群也有不少大佬。）
 - 橘子找工MandarinCareer（公众号：gh_00e8f8bd808d）
-- DBC澳洲求职
+- DBC澳洲求职（公众号）
+- GradCircle（公众号）
 - ACS Professional Year Half-day Summit
 - Meetups
 - Networking
