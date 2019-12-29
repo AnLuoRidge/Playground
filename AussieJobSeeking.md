@@ -35,6 +35,13 @@
 - 微信内推群
 - 在任何IT相关的微信群中直接打听
 
+#### Extra
+- [V2EX Jobs](https://cn.v2ex.com/go/jobs?p=1)
+
+#### Freelancer
+- [V2EX Freelancer](https://cn.v2ex.com/go/outsourcing?p=1)
+- [电鸭](https://eleduck.com/)
+
 ## Resume
 1 page may not enough even for a grad. 2-3 pages are better, matching more keywords.
 
