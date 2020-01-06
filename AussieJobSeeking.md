@@ -2,6 +2,9 @@
 （不知道会不会被哪位小伙伴搜到，如想留言请发issue）
 
 ## Resource 求职资源
+在开始“漫无目的”地浏览工作信息时，你会非常需要一个网址黑名单工具，以免再次踏入同一网页被PR等限制再恶心一遍。
+
+我用的工具是这个 [Chrome插件](https://github.com/ZDL-Git/browse-manager)。
 ### Grads
 - CareerHub
 - [Ribit](ribit.net) (a platform from CSIRO Data 61)
