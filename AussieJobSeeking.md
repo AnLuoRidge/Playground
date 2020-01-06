@@ -1,7 +1,7 @@
 # 澳洲IT求职
 （不知道会不会被哪位小伙伴搜到，如想留言请发issue）
 
-## Resource 求职资源
+## Job Board 工作信息来源
 在开始“漫无目的”地浏览工作信息时，你会非常需要一个网址黑名单工具，以免再次踏入同一网页被PR等限制再恶心一遍。
 
 我用的工具是这个 [Chrome插件](https://github.com/ZDL-Git/browse-manager)。
@@ -47,7 +47,8 @@
 
 ## Resume
 1 page may not enough even for a grad. 2-3 pages are better, matching more keywords.
-
+[如何撰写澳洲IT工作简历](https://www.bigdream.com.au/zh/articles/how-to-write-an-it-resume-in-australia)
+**请提醒我要存一份PDF**
 
 ## Application Progress 投递进度
 - 201910??-FUJITSU-Blockchain, etc. 
