@@ -48,6 +48,9 @@
 - [V2EX Freelancer](https://cn.v2ex.com/go/outsourcing?p=1)
 - [电鸭](https://eleduck.com/)
 
+### Agency
+中介也可以考虑下。并且澳洲法律规定，中介只能问雇主收钱。
+
 ## Resume
 1 page may not enough even for a grad. 2-3 pages are better, matching more keywords.
 [如何撰写澳洲IT工作简历](https://www.bigdream.com.au/zh/articles/how-to-write-an-it-resume-in-australia)
