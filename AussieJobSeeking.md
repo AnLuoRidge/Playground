@@ -33,7 +33,7 @@
 ### General
 - Seek
 - Indeed
-- Jora
+- Jora 
 - LinkedIn
 - Gumtree
 - [I work for NSW](https://iworkfor.nsw.gov.au/)
@@ -56,7 +56,9 @@
 [如何撰写澳洲IT工作简历](https://www.bigdream.com.au/zh/articles/how-to-write-an-it-resume-in-australia)
 **请提醒我要存一份PDF**
 
-## Application Progress 投递进度
+## Application Progress (part) 部分投递记录
+可以看出每日投递量不足，有前辈建议保持每天10+投递为宜。
+
 - 201910??-FUJITSU-Blockchain, etc. 
 - 20191023-AFL-RN
 - 20191114-OverIP-Front-end
