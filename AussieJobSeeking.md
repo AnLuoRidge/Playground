@@ -32,7 +32,7 @@
 
 ### General
 - Seek
-- Indeed
+- Indeed (据说回复率狠高）
 - Jora 
 - LinkedIn
 - Gumtree
