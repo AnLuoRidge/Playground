@@ -50,6 +50,7 @@
 
 ### Agency
 中介也可以考虑下。并且澳洲法律规定，中介只能问雇主收钱。
+本土IT中介里比较大的有 HAYS
 
 ## Resume
 1 page may not enough even for a grad. 2-3 pages are better, matching more keywords.
