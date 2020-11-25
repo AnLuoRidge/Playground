@@ -1,11 +1,27 @@
-// import React, { useState, Fragment } from "react";
-import ReactDOM from "react-dom";
 import React, { useRef, useState } from 'react';
+import ReactDOM from "react-dom";
 import GoogleMapReact from 'google-map-react';
 
 // const AnyReactComponent = ({ text }) => <div style={{fontSize:18}}>{text}</div>;
 
-const SimpleMap = () => {
+// Doesn't work. Looks like we have to manully clear the rendered routes and markders.
+const RouteView = () => {
+  const flightPlanCoordinates = [
+    { lat: -33.8969759, lng: 151.1715249 },
+    { lat: -33.9969759, lng: 151.2715249 },
+    { lat: -33.9269759, lng: 151.2715249 },
+  ];
+  const [coordinates, setCoordinates] = useState(flightPlanCoordinates);
+  return <>
+  <button onClick={() => {setCoordinates([
+        { lat: -33.8969759, lng: 151.1715249 },
+        { lat: -33.9969759, lng: 151.2715249 },
+  ])}}>route 2</button>
+    <SimpleMap coordinates={coordinates} />
+  </> 
+}
+
+const SimpleMap = ({ coordinates }) => {
   const [mapRef, setMapRef] = useState(null);
   const defaultProps = {
     center: {
@@ -20,13 +36,13 @@ const SimpleMap = () => {
     //     // Store a reference to the google map instance in state
     setMapRef(map);
 
-    const flightPlanCoordinates = [
-      { lat: -33.8969759, lng: 151.1715249 },
-      { lat: -33.9969759, lng: 151.2715249 },
-      { lat: -33.9269759, lng: 151.2715249 },
-    ];
+    // const flightPlanCoordinates = [
+    //   { lat: -33.8969759, lng: 151.1715249 },
+    //   { lat: -33.9969759, lng: 151.2715249 },
+    //   { lat: -33.9269759, lng: 151.2715249 },
+    // ];
     const flightPath = new maps.Polyline({
-      path: flightPlanCoordinates,
+      path: coordinates,
       geodesic: true,
       strokeColor: "#97e882",
       strokeOpacity: 1.0,
@@ -35,7 +51,8 @@ const SimpleMap = () => {
   
     flightPath.setMap(map);
 
-    flightPlanCoordinates.map((cood) => {
+
+    coordinates.forEach((cood) => {
       new maps.Marker({
         position: cood,
         map: map,
@@ -67,7 +84,7 @@ const SimpleMap = () => {
 
 export default SimpleMap;
 const rootElement = document.getElementById("root");
-ReactDOM.render(<SimpleMap />, rootElement);
+ReactDOM.render(<RouteView />, rootElement);
 // // We will use these things from the lib
 // // https://react-google-maps-api-docs.netlify.com/
 // import {
@@ -98,7 +115,7 @@ ReactDOM.render(<SimpleMap />, rootElement);
 //   // Load the Google maps scripts
 //   const { isLoaded } = useLoadScript({
 //     // Enter your own Google Maps API key
-//     googleMapsApiKey: "",
+//     googleMapsApiKey: "", //"AIzaSyBPEWBR2fxkQM7IlYS3jdAfJ4u9PzqX19I"
 //   });
 
 //   // The places I want to create markers for.
